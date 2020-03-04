@@ -1,4 +1,5 @@
 // writing on a text file
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -17,8 +18,10 @@ int main () {
 	entrada >> m;
 	entrada >> n;
 
-	vector<int> v;
-	vector<vector<int>> S(n);
+	// vector<int> v;
+	// vector<vector<int>> S(n);
+	vector<vector<int>> C(m, vector<int>(n, 0));
+	
 
 	getline(entrada, line);
 	for (int i = 0; i < n; ++i)
@@ -27,10 +30,22 @@ int main () {
 		std::stringstream ss;
 		ss.str (line);
 		while(ss >> v1)
-			S[i].push_back(v1);
+		{
+			C[v1-1][i] = 1;
+		}
+
+			// S[i].push_back(v1);
 	}
 
 	entrada.close();
+
+	for(auto i: C){
+		for(auto j: i){
+			cout << j << ' ';
+		}
+		cout << endl;
+	}
+
 
 //--------Simplificações--------------------
 

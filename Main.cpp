@@ -1,4 +1,6 @@
-// writing on a text file
+// command compilation
+// g++ -std=c++11 Main.cpp -o Main
+
 #include <algorithm>
 #include <iostream>
 #include <fstream>
@@ -21,6 +23,7 @@ int main () {
 	// vector<int> v;
 	// vector<vector<int>> S(n);
 	vector<vector<int>> C(m, vector<int>(n, 0));
+	vector<vector<int>> Bound(n, vector<int>(2, 0));
 	
 
 	getline(entrada, line);
@@ -48,7 +51,29 @@ int main () {
 
 
 //--------Simplificações--------------------
+	// Simplificação 1
 
+	for(auto i: C){
+		int sum = 0;
+		int s = 0
+		for(auto j: i){
+			if(C[j] == 1){
+				if(sum > 0)
+					break
+				sum++;
+				s = j;
+			}
+
+		}
+		if(sum == 1){
+			Bound[s][0] = 1;
+			Bound[s][1] = 1;
+		}
+
+	}
+
+	// Simplificação 2
+	// for_each(begin(C), end(C))
 
 //--------Saída-------------------------
 	ofstream saida ("saida.txt");

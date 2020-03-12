@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	ifstream entrada ("entrada.txt");
-	int m, n, value;
+	int m, n, value, flag;
 	string line;
 
 	entrada >> m;
@@ -19,7 +19,7 @@ int main()
 	vector<bool> Ativo(m, true);
 	vector<int> Quantidade(m, 0);
 
-	getline(entrada, line); //bug
+	getline(entrada, line);
 	for (int i = 0; i < n; ++i)
 	{		
 		getline(entrada, line);
@@ -28,7 +28,6 @@ int main()
 		while(ss >> value)
 		{
 			Rest[value-1][i] = 1;
-
 		}
 	}
 
@@ -53,7 +52,7 @@ int main()
 			// cout << i << " soma="<<soma<<endl;
 		}
 		Quantidade[i] = soma;
-		if (soma == 1){
+		if (soma == 1 && Ativo[i]){
 			// cout << "Entrou"<<endl;
 			int j = 0;
 			
@@ -80,10 +79,12 @@ int main()
 				if (Ativo[j] && Ativo[i]){
 					count = 0;
 					for (int k = 0; k < n; ++k){
-						if(Rest[i][k] == Rest[j][k]){
+						if(Rest[i][k] == Rest[j][k] && Rest[i][k] == 1){
 							count++;
 						}
 					}
+					cout << "i="<<i<<";j="<<j<<" - ";
+					cout << "count = " << count<<endl;
 					if(count == Quantidade[i]){
 						Ativo[j] = false;
 					}else if(count == Quantidade[j]){
@@ -107,7 +108,7 @@ int main()
 	saida << "\nSubject To\n";
 	for (int i = 0; i < m; ++i)
 	{
-		int flag= 0; // Bug
+		flag= 0;
 		if(Ativo[i]){
 			saida << " c" << i+1 << ": ";
 			for (int j = 0; j < n; ++j){
